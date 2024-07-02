@@ -8,7 +8,29 @@ class RequestMethod {
     protected $connection;
 
     public function __construct() {
-        $this->connection = Conexao::getConnection();
+        $this->connection = static::getPDOConnection();
+    }
+
+    private static function getPDOConnection() {
+        $driver = "";
+        $host = "";
+        $dbName = "";
+        $user = "";
+        $password = "";
+
+        $pdoConfig = $driver . ":" . "Server=" . $host . ";";
+        $pdoConfig .= "Database=" . $dbName . ";";
+
+        try {
+            if (!isset($connection)) {
+                $connection = new PDO($pdoConfig, $user, $password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }
+            return $connection;
+        } catch (PDOException $e) {
+            static::response(500, ["message" => "Internal server error."]);
+            throw $e;
+        }
     }
 
     public function resolve() {
