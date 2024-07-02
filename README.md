@@ -1,4 +1,4 @@
-# php_auth
+# auth_php
 
 PHP authentication API using JWT and SQL Server.
 
