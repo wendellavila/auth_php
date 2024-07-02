@@ -29,7 +29,6 @@ class RequestMethod {
             return $connection;
         } catch (PDOException $e) {
             static::response(500, ["message" => "Internal server error."]);
-            throw $e;
         }
     }
 
