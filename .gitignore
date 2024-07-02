@@ -1,0 +1,4 @@
+.vscode
+*.key
+composer.phar
+/vendor/
